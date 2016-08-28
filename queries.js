@@ -55,7 +55,6 @@ function getAllFilings(req, res, next) {
         inner join trans_info t on t.document_id = f.id
         order by symbol asc
         limit ${per_page}`
-        console.log(req.query.symbol)
       return t.any(query,req.query.symbol)
         .then(filings => {
           results.filings = filings
