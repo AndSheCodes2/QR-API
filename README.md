@@ -7,6 +7,8 @@ Available filters:
 
 ```json
 {
+	"total_filings":"3190",
+	"total_pages":128,
 	"results_per_page": 25,
 	"filings": [{
 		"external_id": "0a4d0e12-5cfc-494c-ac46-cc28ba9c0dad",
