@@ -32,6 +32,11 @@ app.use(function(req, res, next) {
   next(err);
 });
 
+pp.use(function (req, res, next) {
+  res.header("Content-Type",'application/json');
+  next();
+});
+
 // error handlers
 
 // development error handler
@@ -50,6 +55,7 @@ if (app.get('env') === 'development') {
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next){
+    app.set('json spaces',0)
     res.status(err.status || 500);
     res.send({
         message: err.message,
