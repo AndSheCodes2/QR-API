@@ -1,6 +1,6 @@
 {
   "processes": ["app.js"],
   "env": {
-    "DATABASE_URL": "postgres://readerwriter:aVsN8o6&Y822@sec.cv1352w6p1e5.us-east-1.rds.amazonaws.com:5432/sec_filings?ssl=false"
+    "DATABASE_URL": "postgres://readerwriter:aVsN8o6&Y822@sec.cv1352w6p1e5.us-east-1.rds.amazonaws.com:5432/sec_filings?ssl=false&?sslmode=disable"
   }
 }
