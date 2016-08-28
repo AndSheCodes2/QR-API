@@ -9,14 +9,13 @@ var connectionString = 'postgres://localhost:5432/sec_filings';
 var db = pgp(connectionString);
 
 function getAllFilings(req, res, next) {
-  var per_page= req.query.results_per_page || results_per_page
+  var per_page= req.query.results_per_page || 25
   var results = {
     results_per_page: per_page
   }
 
   db.task(function(t){
     if (req.query.hasOwnProperty('cik')){
-      // console.log('[cik]')
       query = `with
         filings as ( select id, external_id, cik, schema_version, type, symbol, name, period from filings where cik = $1  ),
         owners as ( select document_id, name, director, street_1, street_2, city, postal, state from owners where document_id in ( select distinct id from filings ) ),
@@ -42,7 +41,6 @@ function getAllFilings(req, res, next) {
             })
         })
     }else if (req.query.hasOwnProperty('symbol')){
-      // console.log('[symbol]')
       query = `with
         filings as ( select id, external_id, cik, schema_version, type, symbol, name, period from filings where symbol = $1),
         owners as ( select document_id, name, director, street_1, street_2, city, postal, state from owners where document_id in ( select distinct id from filings ) ),
@@ -57,6 +55,7 @@ function getAllFilings(req, res, next) {
         inner join trans_info t on t.document_id = f.id
         order by symbol asc
         limit ${per_page}`
+        console.log(req.query.symbol)
       return t.any(query,req.query.symbol)
         .then(filings => {
           results.filings = filings
@@ -68,7 +67,6 @@ function getAllFilings(req, res, next) {
             })
         })
     }else{
-      // console.log('[default]')
       query = `with
         filings as ( select id, external_id, cik, schema_version, type, symbol, name, period from filings ),
         owners as ( select document_id, name, director, street_1, street_2, city, postal, state from owners where document_id in ( select distinct id from filings ) ),
