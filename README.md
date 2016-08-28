@@ -1,8 +1,10 @@
 ## Endpoints
 ### GET /api/filings
-+ Available filters:
+Available filters:
 + cik
 + symbol
++ results_per_page
+
 ```json
 {
 	"results_per_page": 25,
