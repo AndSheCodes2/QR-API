@@ -1,3 +1,5 @@
+create extension "uuid-ossp";
+
 create table filings (
   id serial primary key,
   external_id uuid,
@@ -8,6 +10,10 @@ create table filings (
   name varchar(255),
   period timestamp without time zone
 );
+
+create index on filings(cik);
+create index on filings(type);
+create index on filings(symbol);
 
 create table owners (
   id serial primary key,
@@ -21,6 +27,8 @@ create table owners (
   state varchar(25)
 );
 
+create index on owners(document_id);
+
 create table transactional_info (
   id serial primary key,
   document_id integer,
@@ -32,9 +40,13 @@ create table transactional_info (
   acquired_disposed_code varchar(25)
 );
 
+create index on transactional_info(document_id);
+
 create table footnotes (
   id serial primary key,
   document_id integer,
   note text,
   period timestamp without time zone
 );
+
+create index on footnotes(document_id);
