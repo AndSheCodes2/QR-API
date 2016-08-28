@@ -1,37 +1,58 @@
 ## Endpoints
 ### GET /api/filings
-
++ Available filters:
++ cik
++ symbol
 ```json
 {
-  "total_count": 0,
-  "filings": [
-    {
-      "company_id": "xxx",
-      "cik": "xxx",
-      "accession_no": "xxxxxxxxx",
-      "rec_date": "YYYY-MM-DD"
-    }
-  ]
+	"results_per_page": 25,
+	"filings": [{
+		"external_id": "0a4d0e12-5cfc-494c-ac46-cc28ba9c0dad",
+		"cik": "0000004281",
+		"type": "4",
+		"symbol": "AA",
+		"name": "ALCOA INC.",
+		"period": "2016-07-01T00:00:00.000Z",
+		"owner": {
+			"name": "Reif Leo Rafael",
+			"street_1": "390 PARK AVENUE",
+			"street_2": "",
+			"city": "10022",
+			"state": "",
+			"postal": null,
+			"director": false
+		}
+  }]
 }
 ```
 ### GET /api/filings/:id
 ```json
-```
-### POST /api/filings
-```
-  curl -H 'Content-type: application/json' \
-    -X POST \
-    -d '{ "company_id":"xxx", "cik":"xxx", "accession_no":"xxxxxxxxx", "rec_date":"YYYY-MM-DD" }'
-    http://localhost:3000/api/filings
-```
-[Response]
-```json
-    {
-      "company_id": "xxx",
-      "cik": "xxx",
-      "accession_no": "xxxxxxxxx",
-      "rec_date": "YYYY-MM-DD"
-    }
+{
+  "external_id":"0a4d0e12-5cfc-494c-ac46-cc28ba9c0dad",
+  "cik":"0000004281",
+  "type":"4",
+  "symbol":"AA",
+  "name":"ALCOA INC.",
+  "period":"2016-07-01T00:00:00.000Z",
+  "owner":{
+    "name":"Reif Leo Rafael",
+    "street_1":"390 PARK AVENUE",
+    "street_2":"",
+    "city":"10022",
+    "state":"",
+    "postal":null,
+    "director":false
+  },
+  "trans":{
+    "form_type":0,
+    "code":"",
+    "equity_swap":0,
+    "shares":0,
+    "price_per_share":0,
+    "acquired_disposed_code":""
+  },
+  "notes":null
+}
 ```
 
 ### GET /status
@@ -40,7 +61,9 @@
 ```
 [Response]
 ```json
-  {"status":"Ok"}
+  {
+    "status":"Ok"
+  }
 ```
 
 
