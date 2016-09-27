@@ -1,5 +1,14 @@
 create extension "uuid-ossp";
 
+create table corporations (
+  id serial primary key,
+  symbol varchar(15),
+  name varchar(255),
+  cik varchar(55)
+);
+
+create index on corporations(cik);
+
 create table filings (
   id serial primary key,
   external_id uuid,
